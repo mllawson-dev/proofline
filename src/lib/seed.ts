@@ -63,7 +63,7 @@ const JOBS: JobSpec[] = [
   ['intake', 'Art fair booth backdrop', 'c05', 'Trade show display', [96, 90], 1, false, 5, -2, null, 0],
   ['intake', 'Drop-off directional signs', 'c10', 'Yard sign', [24, 18], 24, false, 1, 6, null, 0],
   // Proofing: a designer is on it.
-  ['proofing', 'Patient welcome wall', 'c01', 'Wall graphic', [144, 96], 1, false, 6, 2, 's02', 0],
+  ['proofing', 'Patient welcome wall', 'c01', 'Wall graphic', [144, 96], 1, false, 6, -1, 's02', 0],
   ['proofing', 'Volunteer fair booth', 'c10', 'Trade show display', [96, 90], 1, false, 8, 3, 's03', 1],
   ['proofing', 'Weekend brunch A-frame', 'c07', 'A-frame', [24, 36], 1, false, 4, 4, 's02', 1],
   ['proofing', 'Job site yard signs', 'c04', 'Yard sign', [24, 18], 40, false, 3, 6, 's03', 0],

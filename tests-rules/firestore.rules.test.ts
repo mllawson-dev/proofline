@@ -82,7 +82,7 @@ describe('guarding the details', () => {
   it('stops production from editing anything but the stage', async () => {
     const job = jobAt('printing');
     await seed(job);
-    await assertFails(updateDoc(doc(as('production'), 'jobs', job.id), { stage: 'finishing', rush: true }));
+    await assertFails(updateDoc(doc(as('production'), 'jobs', job.id), { stage: 'finishing', rush: !job.rush }));
   });
   it('stops a designer from rewriting earlier proof rounds while sending', async () => {
     const job = jobAt('proofing');
