@@ -1,0 +1,70 @@
+rules_version = '2';
+// Proofline security rules. They mirror src/lib/roles.ts move for move; tests-rules/firestore.rules.test.ts
+// checks both sides. Roles live in a custom auth claim set by scripts/set-role.ts:
+// request.auth.token.role in ['counter', 'designer', 'production', 'manager'].
+// Customers never sign in. Their proof answers go through /api/proofs with a signed link and the Admin SDK,
+// which these rules do not apply to, so customers get no direct access here at all.
+service cloud.firestore {
+  match /databases/{db}/documents {
+    function signedIn() { return request.auth != null; }
+    function role() { return request.auth.token.role; }
+    function staff() { return signedIn() && role() in ['counter', 'designer', 'production', 'manager']; }
+
+    // One board move: from the stored stage to the requested one.
+    function moving(from, to) {
+      return resource.data.stage == from && request.resource.data.stage == to;
+    }
+    function onlyChanges(keys) {
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly(keys);
+    }
+    // Sending a proof adds exactly one new, unanswered round and leaves earlier rounds alone.
+    function sendsOneNewRound() {
+      let before = resource.data.proofs;
+      let after = request.resource.data.proofs;
+      return after.size() == before.size() + 1
+        && after[0:before.size()] == before
+        && after[before.size()].version == before.size() + 1
+        && after[before.size()].comments == 0
+        && !('outcome' in after[before.size()]);
+    }
+
+    function counterMove() {
+      return onlyChanges(['stage']) && (
+        moving('intake', 'proofing') || moving('ready', 'picked-up') || moving('picked-up', 'ready')
+      );
+    }
+    function designerMove() {
+      return (moving('proofing', 'awaiting-approval') && onlyChanges(['stage', 'proofs']) && sendsOneNewRound())
+        || (moving('proofing', 'intake') && onlyChanges(['stage']));
+    }
+    function productionMove() {
+      return onlyChanges(['stage']) && (
+        moving('printing', 'finishing') || moving('finishing', 'printing') ||
+        moving('finishing', 'quality-check') || moving('quality-check', 'finishing') ||
+        moving('quality-check', 'ready') || moving('ready', 'quality-check')
+      );
+    }
+
+    match /jobs/{jobId} {
+      allow read: if staff();
+      allow create: if staff() && role() in ['counter', 'manager'];
+      allow update: if staff() && (
+        role() == 'manager' ||
+        (role() == 'counter' && counterMove()) ||
+        (role() == 'designer' && designerMove()) ||
+        (role() == 'production' && productionMove())
+      );
+      allow delete: if staff() && role() == 'manager';
+    }
+
+    match /customers/{customerId} {
+      allow read: if staff();
+      allow write: if staff() && role() in ['counter', 'manager'];
+    }
+
+    match /staff/{uid} {
+      allow read: if staff();
+      allow write: if staff() && role() == 'manager';
+    }
+  }
+}

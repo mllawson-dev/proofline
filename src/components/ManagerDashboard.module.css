@@ -1,0 +1,65 @@
+.page { display: grid; gap: var(--s-5); max-width: 90rem; }
+.head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--s-3); }
+.asOf { color: var(--ink-muted); }
+
+/* Headline figures: a number, a name and one line of context. Not charts. */
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: var(--s-3); margin: 0; }
+.tile { display: grid; align-content: start; gap: var(--s-1); padding: var(--s-4); border: var(--border); border-top: 3px solid var(--ink); border-radius: var(--radius-md); background: var(--sheet); }
+.tile dt { font-size: var(--text-label); font-weight: 600; letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--ink-muted); }
+.tile dd { margin: 0; }
+.figure { font-family: var(--font-display); font-stretch: var(--display-stretch); font-size: 2.5rem; font-weight: 700; line-height: 1; }
+.note { color: var(--ink-muted); font-size: var(--text-small); }
+.tile[data-tone='late'] { border-top-color: var(--late); }
+.tile[data-tone='late'] .figure { color: var(--late); }
+
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-4); align-items: start; }
+.col { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-4); align-content: start; min-width: 0; }
+.panel { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-3); padding: var(--s-4); border: var(--border); border-radius: var(--radius-md); background: var(--sheet); }
+.panelHead { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s-3); padding-bottom: var(--s-2); border-bottom: 1px solid var(--ink); }
+.panelHead a { font-size: var(--text-small); font-weight: 600; }
+.count { min-width: 1.75rem; padding: 0 0.4rem; border-radius: 999px; background: var(--paper); font-size: var(--text-small); font-weight: 600; text-align: center; }
+.foot, .emptyNote { color: var(--ink-muted); font-size: var(--text-small); }
+.sub { color: var(--ink-muted); font-size: var(--text-small); }
+
+.panel table { width: 100%; table-layout: fixed; border-collapse: collapse; }
+.panel th, .panel td { padding: var(--s-2) var(--s-2) var(--s-2) 0; border-bottom: 1px solid var(--rule); text-align: left; font-weight: 400; vertical-align: middle; }
+.panel thead th { font-size: var(--text-label); font-weight: 600; letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--ink-muted); border-bottom-color: var(--ink-muted); }
+.panel tbody tr:last-child > * { border-bottom: 0; }
+.panel .num { width: 4.5rem; text-align: right; font-weight: 600; }
+.people th[scope='row'] { font-weight: 500; }
+.people .num { width: 7.5rem; font-weight: 500; white-space: nowrap; }
+
+/* One series, one ink: the bar is magnitude only. The owner lives in the chip's words. */
+.panel .barCol { width: 40%; padding-left: var(--s-3); }
+.bar { display: block; block-size: 0.75rem; min-inline-size: 2px; border-radius: 0 4px 4px 0; background: var(--ink); }
+.load td[data-late] { color: var(--late); }
+.zero { color: var(--ink-muted); font-weight: 400; }
+
+.attention, .rounds { display: grid; margin: 0; padding: 0; list-style: none; }
+.attention li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--s-2) var(--s-4); padding: var(--s-3) 0 var(--s-3) var(--s-3); border-bottom: 1px solid var(--rule); border-left: 3px solid var(--rule); }
+.attention li:last-child { border-bottom: 0; }
+.attention li[data-reason='late'] { border-left-color: var(--late); }
+.attention li[data-reason='due-today'], .attention li[data-reason='rush-soon'] { border-left-color: var(--ink); }
+.attention li[data-reason='proof-waiting'] { border-left-color: var(--owner-customer); }
+.attnMain { display: grid; gap: 1px; min-width: 0; }
+.attnTitle { font-weight: 600; }
+.attnSide { display: grid; justify-items: end; align-content: start; gap: var(--s-1); }
+.attnSide a { font-size: var(--text-small); font-weight: 600; }
+.reason { font-size: var(--text-small); font-weight: 600; }
+.attention li[data-reason='late'] .reason { color: var(--late); }
+.rounds li { display: grid; grid-template-columns: auto 1fr auto; gap: var(--s-3); padding: var(--s-2) 0; border-bottom: 1px solid var(--rule); }
+.rounds li:last-child { border-bottom: 0; }
+
+@media (max-width: 72rem) {
+  .grid { grid-template-columns: minmax(0, 1fr); }
+  .col:last-child { order: -1; } /* the to-do list comes first on smaller screens */
+}
+@media (max-width: 40rem) {
+  .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tile { padding: var(--s-3); }
+  .figure { font-size: 2rem; }
+  .panel .barCol { width: 22%; }
+  .panel .num { width: 3rem; }
+  .attnSide { justify-items: start; }
+  .people .num { width: auto; }
+}

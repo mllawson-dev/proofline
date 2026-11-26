@@ -1,0 +1,17 @@
+node_modules/
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+.DS_Store
+
+# Secrets: environment files and Firebase service account keys never go in git.
+.env
+.env.*
+!.env.example
+*-firebase-adminsdk-*.json
+service-account*.json
+
+# Firebase emulator logs
+firebase-debug.log
+firestore-debug.log

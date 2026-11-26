@@ -1,0 +1,67 @@
+/*
+  Proofline design tokens — "Press Check"
+  Paper-white stock, ink-black type, and the four process inks used only to say who owns a job's next move.
+  Full rationale and contrast table: docs/art-direction.md. Every text/background pair below is ≥ 4.5:1.
+*/
+:root {
+  /* Type */
+  --font-display: 'Archivo Variable', 'Archivo', 'Arial Narrow', Arial, sans-serif;
+  --font-body: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --display-stretch: 78%;          /* Archivo width axis: condensed, like a job ticket header */
+
+  --text-h1: clamp(1.75rem, 2.4vw, 2.25rem);   /* 28–36px */
+  --text-h2: 1.375rem;                          /* 22px */
+  --text-h3: 1.0625rem;                         /* 17px */
+  --text-body: 0.9375rem;                       /* 15px: dense product UI */
+  --text-small: 0.8125rem;                      /* 13px, floor for any readable text */
+  --text-label: 0.75rem;                        /* 12px uppercase labels only, 600 weight, tracked */
+  --lh-tight: 1.15;
+  --lh-body: 1.5;
+  --tracking-label: 0.06em;
+
+  /* Surfaces and ink */
+  --paper: #F6F5F1;        /* app background: uncoated stock */
+  --sheet: #FFFFFF;        /* cards, table, panels */
+  --ink: #16181D;          /* primary text        16.3:1 on paper, 17.8:1 on sheet */
+  --ink-muted: #5B6069;    /* secondary text       5.8:1 on paper,  6.3:1 on sheet */
+  --rule: #D9D7D0;         /* dividers only, never the only edge of a control */
+  --control-edge: #8A8F98; /* input and button borders, 3.25:1 on sheet (non-text 3:1) */
+  --rail: #16181D;         /* navigation rail background */
+  --rail-ink: #E8E6DF;     /* rail text, 14.2:1 */
+
+  /* Action */
+  --accent: #B3124F;       /* "proof magenta": primary actions, focus ring. White on it 6.7:1 */
+  --accent-ink: #FFFFFF;
+  --focus: #B3124F;
+
+  /* Process inks — who owns the next move. Strong value for dots/text, tint for chip backgrounds.
+     Chip text is always --ink on the tint (13–14:1), so color is never the only signal. */
+  --owner-counter: #5B6069;      --owner-counter-tint: #E8E6DF;   /* black/K: front counter */
+  --owner-design: #9C2367;       --owner-design-tint: #F6D3E4;    /* magenta: designer */
+  --owner-customer: #7A5B00;     --owner-customer-tint: #FFE27A;  /* yellow: waiting on customer */
+  --owner-production: #0A6F8C;   --owner-production-tint: #CDEAF3;/* cyan: production floor */
+  --owner-done: #1D6B3A;         --owner-done-tint: #D3EBDB;      /* finished */
+  --late: #A3261F;               --late-tint: #F7D9D6;            /* past due: 7.4:1 on sheet */
+
+  /* Space: 4px base */
+  --s-1: 0.25rem; --s-2: 0.5rem; --s-3: 0.75rem; --s-4: 1rem; --s-5: 1.5rem; --s-6: 2rem; --s-8: 3rem;
+
+  /* Shape: square-ish, like trimmed stock. No drop shadows; layering is by edge. */
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --border: 1px solid var(--rule);
+
+  /* Motion: quick and functional. Nothing loops; nothing moves without a user action. */
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+
+  /* Layout */
+  --rail-width: 15rem;
+  --row-height: 3rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-fast: 0ms; --dur-base: 0ms; }
+}

@@ -1,0 +1,54 @@
+/* Phone-first single column. On a desktop it stays a readable column, flush left like the rest of the product. */
+.screen { min-height: 100vh; display: grid; grid-template-rows: auto auto 1fr auto; max-width: 36rem; background: var(--sheet); border-right: var(--border); }
+
+.demo { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--s-1) var(--s-3); padding: var(--s-2) var(--s-4); background: var(--paper); border-bottom: var(--border); font-size: var(--text-small); color: var(--ink-muted); }
+.demo a { color: var(--ink); font-weight: 600; }
+
+.brandBar { display: flex; align-items: center; gap: var(--s-2); padding: var(--s-3) var(--s-4); background: var(--rail); color: var(--rail-ink); font-weight: 600; }
+
+.body { display: grid; align-content: start; gap: var(--s-5); padding: var(--s-5) var(--s-4) var(--s-6); outline: none; }
+.intro { display: grid; gap: var(--s-2); }
+.intro p:last-child { color: var(--ink-muted); }
+
+.sheet { padding: var(--s-4); border: var(--border); border-radius: var(--radius-md); background: var(--paper); }
+
+.specs { display: grid; margin: 0; border-top: 1px solid var(--ink); }
+.specs div { display: grid; grid-template-columns: 8.5rem 1fr; gap: var(--s-3); padding: var(--s-2) 0; border-bottom: 1px solid var(--rule); }
+.specs dt { font-size: var(--text-label); font-weight: 600; letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--ink-muted); padding-top: 2px; }
+.specs dd { margin: 0; }
+
+.history { font-size: var(--text-small); }
+.history summary { cursor: pointer; font-weight: 600; min-height: 2.75rem; display: flex; align-items: center; }
+.history ul { margin: 0; padding-left: var(--s-5); color: var(--ink-muted); }
+
+.decide { display: grid; gap: var(--s-3); padding-top: var(--s-2); }
+.check { display: grid; grid-template-columns: auto 1fr; align-items: start; gap: var(--s-3); padding: var(--s-3); border: 1px solid var(--control-edge); border-radius: var(--radius-sm); cursor: pointer; }
+.check input { width: 1.375rem; height: 1.375rem; margin: 0; accent-color: var(--accent); }
+.check input[aria-invalid='true'] { outline: 2px solid var(--late); outline-offset: 2px; }
+
+.field { display: grid; gap: var(--s-1); }
+.fieldLabel { font-weight: 600; }
+.hint { color: var(--ink-muted); font-size: var(--text-small); }
+.field textarea { padding: var(--s-3); border: 1px solid var(--control-edge); border-radius: var(--radius-sm); font: inherit; resize: vertical; }
+.field textarea[aria-invalid='true'] { border-color: var(--late); border-width: 2px; }
+.error { color: var(--late); font-weight: 600; font-size: var(--text-small); }
+
+/* Thumb-sized buttons, full width on phones. */
+.primary, .secondary { min-height: 3rem; padding: 0 var(--s-4); border-radius: var(--radius-sm); font-weight: 600; cursor: pointer; transition: background-color var(--dur-fast) var(--ease); }
+.primary { border: 1px solid var(--accent); background: var(--accent); color: var(--accent-ink); }
+.primary:hover { background: #8f0e3f; }
+.secondary { border: 1px solid var(--ink); background: var(--sheet); color: var(--ink); }
+.secondary:hover { background: var(--paper); }
+
+.result { display: grid; gap: var(--s-3); padding: var(--s-5) var(--s-4); border: 1px solid var(--owner-done); border-left-width: 4px; border-radius: var(--radius-md); background: var(--owner-done-tint); outline: none; }
+.result[data-outcome='changes-requested'] { border-color: var(--owner-design); background: var(--owner-design-tint); }
+.resultActions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3); }
+.resultActions button { min-height: 2.75rem; padding: 0 var(--s-3); border: 1px solid var(--ink); border-radius: var(--radius-sm); background: var(--sheet); font-weight: 600; cursor: pointer; }
+.resultActions a { font-weight: 600; }
+
+.footer { padding: var(--s-4); border-top: var(--border); color: var(--ink-muted); font-size: var(--text-small); }
+
+@media (min-width: 40rem) {
+  .decide { grid-template-columns: 1fr 1fr; }
+  .check, .field, .error { grid-column: 1 / -1; }
+}

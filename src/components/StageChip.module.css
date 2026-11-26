@@ -1,0 +1,7 @@
+.chip { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.125rem 0.5rem 0.125rem 0.4rem; border-radius: 999px; background: var(--tint); color: var(--ink); font-size: var(--text-small); font-weight: 500; white-space: nowrap; }
+.dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--strong); }
+.chip[data-owner='counter'] { --tint: var(--owner-counter-tint); --strong: var(--owner-counter); }
+.chip[data-owner='design'] { --tint: var(--owner-design-tint); --strong: var(--owner-design); }
+.chip[data-owner='customer'] { --tint: var(--owner-customer-tint); --strong: var(--owner-customer); }
+.chip[data-owner='production'] { --tint: var(--owner-production-tint); --strong: var(--owner-production); }
+.chip[data-owner='done'] { --tint: var(--owner-done-tint); --strong: var(--owner-done); }
