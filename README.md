@@ -2,6 +2,8 @@
 
 A job tracker for a sign and print shop: order intake, proof approval, production and quality check, with each person seeing only their part. A portfolio concept by [Michael L. Lawson](https://www.mll-creativeeng.com). The shop, customers and jobs are fictional.
 
+**[Open the live demo](https://proofline-phi-one.vercel.app/)** · [Case study](https://www.mll-creativeeng.com/case-studies/proofline/)
+
 The public demo runs on sample data in your browser, with no login. Switch roles from the rail to see the shop as the front counter, a designer, production or the manager. The same code runs on Firebase with real accounts ([going live](docs/going-live.md)).
 
 ## What's in it — v1.0
