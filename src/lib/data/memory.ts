@@ -2,8 +2,8 @@ import { customers, generateJobs, SNAPSHOT_DATE, staff } from '../seed';
 import type { Job, Stage } from '../types';
 import type { JobRepository } from './repository';
 
-export function createMemoryRepository(seed?: number): JobRepository {
-  const jobs = new Map(generateJobs(seed).map((j) => [j.id, j] as const));
+export function createMemoryRepository(): JobRepository {
+  const jobs = new Map(generateJobs().map((j) => [j.id, j] as const));
   return {
     async listJobs() {
       return [...jobs.values()];

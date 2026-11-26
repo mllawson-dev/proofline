@@ -15,7 +15,8 @@
     "test": "vitest run",
     "test:rules": "firebase emulators:exec --only firestore --project demo-proofline \"vitest run --config vitest.rules.config.ts\"",
     "seed:firestore": "tsx scripts/seed-firestore.ts",
-    "set-role": "tsx scripts/set-role.ts"
+    "set-role": "tsx scripts/set-role.ts",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@fontsource-variable/archivo": "5.3.0",
@@ -30,7 +31,9 @@
     "server-only": "0.0.1"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.14.1",
     "@firebase/rules-unit-testing": "6.0.0",
+    "@playwright/test": "1.65.1",
     "@types/node": "^22.10.0",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",

@@ -11,8 +11,16 @@ const base: Job = {
 };
 
 describe('seed data', () => {
-  it('is deterministic for a given seed', () => {
-    expect(generateJobs(7)).toEqual(generateJobs(7));
+  it('is the same every time, with unique job numbers and titles', () => {
+    const jobs = generateJobs();
+    expect(generateJobs()).toEqual(jobs);
+    expect(new Set(jobs.map((j) => j.id)).size).toBe(jobs.length);
+    expect(new Set(jobs.map((j) => j.title)).size).toBe(jobs.length);
+  });
+  it('never dates a proof after the snapshot or before intake', () => {
+    for (const j of generateJobs()) for (const p of j.proofs) {
+      expect(p.sentOn >= j.createdOn && p.sentOn <= SNAPSHOT_DATE).toBe(true);
+    }
   });
   it('covers every stage', () => {
     const stages = new Set(generateJobs().map((j) => j.stage));

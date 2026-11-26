@@ -1,5 +1,7 @@
 # Proofline
 
+[![CI](https://github.com/mllawson-dev/proofline/actions/workflows/ci.yml/badge.svg)](https://github.com/mllawson-dev/proofline/actions/workflows/ci.yml)
+
 A job tracker for a sign and print shop: order intake, proof approval, production and quality check, with each person seeing only their part. A portfolio concept by [Michael L. Lawson](https://www.mll-creativeeng.com). The shop, customers and jobs are fictional.
 
 **[Open the live demo](https://proofline-phi-one.vercel.app/)** · [Case study](https://www.mll-creativeeng.com/case-studies/proofline/)
@@ -23,7 +25,9 @@ Requires Node 22.12 or newer.
 ```bash
 npm install
 npm run dev          # http://localhost:3000, sample-data demo
-npm test             # 62 unit tests
+npm test             # 63 unit tests (Vitest)
+npx playwright install chromium     # once
+npm run build && npm run test:e2e   # 14 browser tests (Playwright + axe-core), desktop and phone
 npm run typecheck
 npm run test:rules   # Firestore security rules in the emulator (needs Java 21+)
 ```
